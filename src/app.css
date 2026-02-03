@@ -1,0 +1,16 @@
+/* src/app.css */
+:root {
+  --primary-color: #ff3e00;
+  --font-main: 'Inter', sans-serif;
+  color: white;
+}
+
+body {
+  margin: 1em;
+  font-family: var(--font-main);
+  background-color: #1E1E1E;
+}
+
+h1 {
+    color: white;
+}
