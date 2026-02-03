@@ -1,29 +1,40 @@
-<script>
-	import CanvasPortal from "$lib/components/CanvasPortal.svelte";
-	import { T } from "@threlte/core";
+<script lang="ts">
+	import DicePanel from '$lib/components/DicePanel.svelte';
+	import { Canvas, T } from '@threlte/core';
+	import { View } from '@threlte/extras';
 
+	let d20Target: HTMLDivElement | null = $state(null);
 </script>
-<!-- Regular DOM elements for UI -->
-<button>Click me</button>
 
-<div class="three-container">
-<CanvasPortal>
-  <T.PerspectiveCamera
-    position.z={10}
-    makeDefault
-  />
+<div class="grid">
+	<DicePanel diceValue={20} onTarget={(element) => (d20Target = element)} />
+</div>
 
-  <T.Mesh>
-    <T.BoxGeometry />
-    <T.MeshBasicMaterial color="blue" />
-  </T.Mesh>
-</CanvasPortal>
+<div class="canvas">
+	<Canvas>
+		{#if d20Target}
+			<View dom={d20Target}>
+				<T.Mesh position={[0, 0, 0]} scale={2.5} rotation.y={90}>
+					<T.IcosahedronGeometry />
+					<T.MeshBasicMaterial color="blue" wireframe={true} />
+				</T.Mesh>
+			</View>
+		{/if}
+	</Canvas>
 </div>
 
 <style>
-.three-container {
-    height: 5em;
-    width: 5em;
-    background-color: aqua;
-}
+	.canvas {
+		position: absolute;
+		inset: 0;
+		z-index: 0;
+		pointer-events: none;
+	}
+
+	.grid {
+		z-index: 1;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 2em;
+	}
 </style>
