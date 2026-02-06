@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { clampValue, generateRandomInt } from '$lib/utility/numbers';
+
 	let {
 		diceValue,
 		onTarget
@@ -14,9 +16,21 @@
 	});
 
 	let diceMultiplier: number = $state(1);
-	let rollValue: number = $state(0);
 
-	const randomInt = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min;
+	let rollValueList = $state<number[]>([]);
+	const rollTotal = $derived(rollValueList.reduce((a, b) => a + b, 0));
+
+	const decrementMultiplier = () => {
+		diceMultiplier = clampValue(diceMultiplier - 1, 1, 100);
+	};
+
+	const incrementMultiplier = () => {
+		diceMultiplier = clampValue(diceMultiplier + 1, 1, 100);
+	};
+
+	const rollDice = () => {
+		rollValueList = Array.from({ length: diceMultiplier }, () => generateRandomInt(1, diceValue));
+	};
 </script>
 
 <div class="grid">
@@ -28,30 +42,25 @@
 			{/if}
 		</div>
 		<div class="dice-container">
-			<button
-				onclick={() => {
-					if (diceMultiplier > 1) {
-						diceMultiplier = diceMultiplier - 1;
-					}
-				}}
-				class="accounting-button">-</button
-			>
+			<button onclick={decrementMultiplier} class="accounting-button">-</button>
 			<!-- svelte-ignore a11y_consider_explicit_label -->
-			<button class="dice-button" onclick={() => {}}>
+			<button class="dice-button" onclick={rollDice}>
 				<div class="target" bind:this={targetModel}></div>
 			</button>
 
-			<button
-				onclick={() => {
-					if (diceMultiplier < 100) {
-						diceMultiplier = diceMultiplier + 1;
-					}
-				}}
-				class="accounting-button">+</button
-			>
+			<button onclick={incrementMultiplier} class="accounting-button">+</button>
 		</div>
 
-		<h1>{rollValue == 0 ? 'x' : rollValue}</h1>
+		<h1>
+			{rollTotal == 0 ? '\u00A0' : rollTotal}
+		</h1>
+		<p>
+			{#if rollValueList.length > 1}
+				[{rollValueList.join(' + ')}]
+			{:else}
+				{'\u00A0'}
+			{/if}
+		</p>
 	</div>
 </div>
 
