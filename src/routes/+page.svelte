@@ -1,15 +1,19 @@
 <script lang="ts">
-	import DiceCanvas from '$lib/components/DiceCanvas.svelte';
-	import DicePanel from '$lib/components/DicePanel.svelte';
+	import DiceCanvas from '$lib/components/canvas/DiceCanvas.svelte';
+	import DicePanel from '$lib/components/dom/DicePanel.svelte';
+	import { DICE_VALUES } from '$lib/models/DiceState';
+	import { DiceState } from '$lib/state/DiceState.svelte';
 
 	let d20Target: HTMLDivElement | null = $state(null);
 </script>
 
 <div class="grid">
-	<DicePanel diceValue={20} onTarget={(element) => (d20Target = element)} />
+	{#each DICE_VALUES as value (value)}
+		<DicePanel dieValue={value} dieState={DiceState[value]} />
+	{/each}
 </div>
 
-<DiceCanvas {d20Target} />
+<DiceCanvas />
 
 <style>
 	.grid {
