@@ -8,9 +8,7 @@
 <div class="canvas">
 	<Canvas>
 		{#if DiceState[20].target}
-			<DiceView dieState={DiceState[20]}>
-				<T.IcosahedronGeometry />
-			</DiceView>
+			<DiceView dieState={DiceState[20]}></DiceView>
 		{/if}
 	</Canvas>
 </div>

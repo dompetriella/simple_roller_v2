@@ -2,14 +2,13 @@
 	import type { DieState } from '$lib/models/DiceState';
 	import { generateRandomInt } from '$lib/utility/numbers';
 	import { T, useTask } from '@threlte/core';
-	import { interactivity, View } from '@threlte/extras';
+	import { View } from '@threlte/extras';
+	import { BoxGeometry } from 'three';
 
 	let {
-		dieState,
-		children
+		dieState
 	}: {
 		dieState: DieState;
-		children: () => any;
 	} = $props();
 
 	let rotationX = $state(generateRandomInt(0, 180));
@@ -31,13 +30,12 @@
 		rotation.x={rotationX}
 		rotation.z={rotationZ}
 	>
-		{@render children()}
-
+		<T.BoxGeometry args={[1, 1, 1]}></T.BoxGeometry>
 		<T.MeshBasicMaterial toneMapped={false} color={dieState.meshColor} />
-
-		<T.Mesh scale={1.001}>
-			{@render children()}
-			<T.MeshBasicMaterial color={dieState.wireframeColor} toneMapped={false} wireframe={true} />
-		</T.Mesh>
+		<T.LineSegments>
+			<T.EdgesGeometry args={[new BoxGeometry(1, 1, 1)]}></T.EdgesGeometry>
+			<T.LineBasicMaterial toneMapped={false} color={dieState.wireframeColor} linewidth={10}
+			></T.LineBasicMaterial>
+		</T.LineSegments>
 	</T.Mesh>
 </View>
