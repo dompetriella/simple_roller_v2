@@ -6,9 +6,11 @@
 	import { BoxGeometry } from 'three';
 
 	let {
-		dieState
+		dieState,
+		geometry
 	}: {
 		dieState: DieState;
+		geometry: any
 	} = $props();
 
 	let rotationX = $state(generateRandomInt(0, 180));
@@ -29,13 +31,12 @@
 		rotation.y={rotationY}
 		rotation.x={rotationX}
 		rotation.z={rotationZ}
+		geometry={geometry}
 	>
-		<T.BoxGeometry args={[1, 1, 1]}></T.BoxGeometry>
 		<T.MeshBasicMaterial toneMapped={false} color={dieState.meshColor} />
 		<T.LineSegments>
-			<T.EdgesGeometry args={[new BoxGeometry(1, 1, 1)]}></T.EdgesGeometry>
-			<T.LineBasicMaterial toneMapped={false} color={dieState.wireframeColor} linewidth={10}
-			></T.LineBasicMaterial>
+			<T.EdgesGeometry  args={[geometry]} />
+			<T.LineBasicMaterial toneMapped={false} color={dieState.wireframeColor} />
 		</T.LineSegments>
 	</T.Mesh>
 </View>

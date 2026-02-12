@@ -45,9 +45,6 @@
 		<button onclick={incrementMultiplier} class="accounting-button">+</button>
 	</div>
 
-	<h1>
-		{rollTotal == 0 ? '\u00A0' : rollTotal}
-	</h1>
 	<p>
 		{#if dieState.rollList.length > 1}
 			[{dieState.rollList.join(' + ')}]
@@ -55,6 +52,9 @@
 			{'\u00A0'}
 		{/if}
 	</p>
+	<h1>
+		{rollTotal == 0 ? '--' : rollTotal}
+	</h1>
 </div>
 
 <style>
@@ -64,6 +64,7 @@
 
 	p {
 		margin: 0;
+
 	}
 
 	.dice-button {
@@ -72,7 +73,7 @@
 	}
 
 	.accounting-button {
-		width: 5em;
+		width: 2em;
 		border: none;
 		background-color: transparent;
 		color: white;
@@ -91,13 +92,15 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		border: 1px solid white;
-		padding: 1em 0em;
+		padding: 1em;
+		border-radius: 1em;
+		box-shadow: 0px 0px 10px 1px red;
+
 	}
 
 	.target {
-		width: 10em;
-		height: 10em;
-		border: 1px solid orange;
+		width: 5em;
+		height: 5em;
+		border: 1px lightcoral solid;
 	}
 </style>
