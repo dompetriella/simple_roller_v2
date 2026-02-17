@@ -6,17 +6,22 @@
 </script>
 
 <div class="container">
-	<div class="row">
-<DicePanel dieValue={20} dieState={DiceState[20]} />
-<DicePanel dieValue={6} dieState={DiceState[6]} />
+	<div class="backdrop-container">
+		<div class="backdrop"></div>
 	</div>
-	<div class="row">
-<DicePanel dieValue={4} dieState={DiceState[4]} />
-<DicePanel dieValue={8} dieState={DiceState[8]} />
-	</div>
-	<div class="row">
-<DicePanel dieValue={10} dieState={DiceState[10]} />
-<DicePanel dieValue={12} dieState={DiceState[12]} />
+	<div>
+		<div class="row">
+			<DicePanel dieValue={20} dieState={DiceState[20]} />
+			<DicePanel dieValue={6} dieState={DiceState[6]} />
+		</div>
+		<div class="row">
+			<DicePanel dieValue={4} dieState={DiceState[4]} />
+			<DicePanel dieValue={8} dieState={DiceState[8]} />
+		</div>
+		<div class="row">
+			<DicePanel dieValue={10} dieState={DiceState[10]} />
+			<DicePanel dieValue={12} dieState={DiceState[12]} />
+		</div>
 	</div>
 </div>
 
@@ -24,13 +29,35 @@
 
 <style>
 	.container {
+		width: 100svw;
+		height: 100svh;
 		display: flex;
 		flex-direction: column;
+		justify-content: center;
 	}
 
 	.row {
 		display: flex;
 		justify-content: space-evenly;
-		padding-bottom: 1em;
+		padding-bottom: 5svw;
+	}
+
+	.backdrop-container {
+		height: 100%;
+		width: 100%;
+		position: absolute;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		filter: blur(50svw);
+		opacity: 0.5;
+	}
+
+	.backdrop {
+		height: 50svw;
+		width: 50svw;
+		border-radius: 1em;
+		z-index: 0;
+		background-color: blue;
 	}
 </style>

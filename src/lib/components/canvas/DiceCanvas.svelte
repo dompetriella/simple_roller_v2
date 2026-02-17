@@ -3,7 +3,13 @@
 	import DiceView from './DiceView.svelte';
 	import { DICE_VALUES } from '$lib/models/DiceState';
 	import { DiceState } from '$lib/state/DiceState.svelte';
-	import { BoxGeometry, DodecahedronGeometry, IcosahedronGeometry, OctahedronGeometry, TetrahedronGeometry } from 'three';
+	import {
+		BoxGeometry,
+		DodecahedronGeometry,
+		IcosahedronGeometry,
+		OctahedronGeometry,
+		TetrahedronGeometry
+	} from 'three';
 </script>
 
 <div class="canvas">
@@ -33,7 +39,7 @@
 	.canvas {
 		position: absolute;
 		inset: 0;
-		z-index: 0;
+		z-index: 2;
 		pointer-events: none;
 	}
 </style>

@@ -11,6 +11,8 @@
 		dieState: DieState;
 	} = $props();
 
+	const shouldAllowMultiplier = $state(false);
+
 	const rollTotal = $derived(dieState.rollList.reduce((a, b) => a + b, 0));
 
 	const decrementMultiplier = () => {
@@ -30,9 +32,9 @@
 
 <div class="roller-container">
 	<div class="title-container">
-		<h1>D{dieValue}</h1>
+		<h1 class="dice-value-text">D{dieValue}</h1>
 		{#if dieState.multiplier > 1}
-			<p>{dieState.multiplier}x</p>
+			<sup class="multiplier-superscript">x{dieState.multiplier}</sup>
 		{/if}
 	</div>
 	<div class="dice-container">
@@ -45,14 +47,16 @@
 		<button onclick={incrementMultiplier} class="accounting-button">+</button>
 	</div>
 
-	<p>
-		{#if dieState.rollList.length > 1}
-			[{dieState.rollList.join(' + ')}]
-		{:else}
-			{'\u00A0'}
-		{/if}
-	</p>
-	<h1>
+	{#if shouldAllowMultiplier}
+		<p class="dice-roll-list-text">
+			{#if dieState.rollList.length > 1}
+				[{dieState.rollList.join(' + ')}]
+			{:else}
+				{'\u00A0'}
+			{/if}
+		</p>
+	{/if}
+	<h1 class="dice-roll-text">
 		{rollTotal == 0 ? '--' : rollTotal}
 	</h1>
 </div>
@@ -64,7 +68,15 @@
 
 	p {
 		margin: 0;
+	}
 
+	.dice-value-text {
+		font-size: 5svw;
+	}
+
+	.dice-roll-text {
+		padding-top: 1svw;
+		font-size: 8svw;
 	}
 
 	.dice-button {
@@ -73,34 +85,38 @@
 	}
 
 	.accounting-button {
-		width: 2em;
 		border: none;
 		background-color: transparent;
 		color: white;
+		width: 100%;
 	}
 
 	.title-container {
 		display: flex;
+		padding-top: 2svw;
+		gap: 0.5svw;
 	}
 
 	.dice-container {
 		display: flex;
+		justify-content: stretch;
+		width: 100%;
 	}
 
 	.roller-container {
+		height: 38svw;
+		width: 38svw;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		padding: 1em;
 		border-radius: 1em;
-		box-shadow: 0px 0px 10px 1px red;
-
+		z-index: 1;
+		background-color: #1e1e1e;
 	}
 
 	.target {
-		width: 5em;
-		height: 5em;
-		border: 1px lightcoral solid;
+		width: 18svw;
+		height: 18svw;
 	}
 </style>

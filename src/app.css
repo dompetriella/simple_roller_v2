@@ -8,6 +8,8 @@
 body {
   font-family: var(--font-main);
   background-color: #1E1E1E;
+  margin: 0px;
+  padding: 0px;
 }
 
 h1 {
