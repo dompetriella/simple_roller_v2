@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { DieState } from '$lib/models/DiceState';
+	import { themeState } from '$lib/theme/ThemeState.svelte';
 	import { generateRandomInt } from '$lib/utility/numbers';
 	import { T, useTask } from '@threlte/core';
 	import { View } from '@threlte/extras';
@@ -10,7 +11,7 @@
 		geometry
 	}: {
 		dieState: DieState;
-		geometry: any
+		geometry: any;
 	} = $props();
 
 	let rotationX = $state(generateRandomInt(0, 180));
@@ -31,12 +32,12 @@
 		rotation.y={rotationY}
 		rotation.x={rotationX}
 		rotation.z={rotationZ}
-		geometry={geometry}
+		{geometry}
 	>
-		<T.MeshBasicMaterial toneMapped={false} color={dieState.meshColor} />
+		<T.MeshBasicMaterial toneMapped={false} color={themeState.fullTheme.primary} />
 		<T.LineSegments>
-			<T.EdgesGeometry  args={[geometry]} />
-			<T.LineBasicMaterial toneMapped={false} color={dieState.wireframeColor} />
+			<T.EdgesGeometry args={[geometry]} />
+			<T.LineBasicMaterial toneMapped={false} color={themeState.fullTheme.onPrimary} />
 		</T.LineSegments>
 	</T.Mesh>
 </View>

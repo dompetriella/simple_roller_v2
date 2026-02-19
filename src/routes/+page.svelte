@@ -8,6 +8,7 @@
 <div class="container">
 	<div class="backdrop-container">
 		<div class="backdrop"></div>
+		<div class="backdrop alt"></div>
 	</div>
 	<div>
 		<div class="row">
@@ -34,6 +35,7 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+		background-color: var(--surface);
 	}
 
 	.row {
@@ -46,18 +48,26 @@
 		height: 100%;
 		width: 100%;
 		position: absolute;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		filter: blur(50svw);
-		opacity: 0.5;
 	}
 
 	.backdrop {
-		height: 50svw;
-		width: 50svw;
-		border-radius: 1em;
+		position: absolute;
+		top: 20%;
+		left: 5%;
+		height: 85svw;
+		width: 85svw;
+		border-radius: 50%;
 		z-index: 0;
-		background-color: blue;
+		background-color: var(--primary);
+		filter: blur(20svw);
+		opacity: 0.5;
+	}
+
+	.alt {
+		top: 50%;
+		left: 40%;
+		height: 55svw;
+		width: 55svw;
+		background-color: var(--secondary);
 	}
 </style>

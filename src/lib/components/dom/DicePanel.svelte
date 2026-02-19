@@ -87,7 +87,7 @@
 	.accounting-button {
 		border: none;
 		background-color: transparent;
-		color: white;
+		color: var(--onSecondarySurface);
 		width: 100%;
 	}
 
@@ -111,8 +111,10 @@
 		justify-content: center;
 		align-items: center;
 		border-radius: 1em;
+		border: 1px solid white;
 		z-index: 1;
-		background-color: #1e1e1e;
+
+		background: radial-gradient(circle, var(--secondarySurface) 35%, transparent 65%);
 	}
 
 	.target {
