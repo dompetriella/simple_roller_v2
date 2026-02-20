@@ -6,6 +6,7 @@ const defaultDieState = (overrides: Partial<DieState> = {}): DieState => ({
 	rollList: [],
 	isHovered: false,
 	isPressed: false,
+	isRolling: false,
 	scale: 2.5,
 	rotationSpeed: 1,
 	...overrides

@@ -10,6 +10,7 @@ export type DieState = {
 
 	isHovered: boolean;
 	isPressed: boolean;
+	isRolling: boolean;
 
 	scale: number;
 	rotationSpeed: number;

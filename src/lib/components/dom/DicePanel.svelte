@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { DieState } from '$lib/models/DiceState';
 	import { updateDie } from '$lib/state/DiceState.svelte';
+	import { themeState } from '$lib/theme/ThemeState.svelte';
 	import { clampValue, generateRandomInt } from '$lib/utility/numbers';
 
 	let {
@@ -11,15 +12,18 @@
 		dieState: DieState;
 	} = $props();
 
-	const shouldAllowMultiplier = $state(false);
+	// Value logic
 
+	const shouldAllowMultiplier = $state(false);
 	const rollTotal = $derived(dieState.rollList.reduce((a, b) => a + b, 0));
 
-	const decrementMultiplier = () => {
+	const decrementMultiplier = (e: MouseEvent) => {
+		e.stopPropagation();
 		updateDie(dieValue, { multiplier: clampValue(dieState.multiplier - 1, 1, 100) });
 	};
 
-	const incrementMultiplier = () => {
+	const incrementMultiplier = (e: MouseEvent) => {
+		e.stopPropagation();
 		updateDie(dieValue, { multiplier: clampValue(dieState.multiplier + 1, 1, 100) });
 	};
 
@@ -27,10 +31,28 @@
 		updateDie(dieValue, {
 			rollList: Array.from({ length: dieState.multiplier }, () => generateRandomInt(1, dieValue))
 		});
+		dieState.isRolling = true;
+		setTimeout(() => {
+			dieState.isRolling = false;
+		}, rollingAnimationDuration);
 	};
+
+	// Visual logic
+
+	const rollingAnimationDuration = 250;
+
+	const backgroundFlashPercent = `${parseFloat(themeState.fullTheme.rollContainerType!) / 4}%`;
 </script>
 
-<div class="roller-container">
+<!-- svelte-ignore a11y_click_events_have_key_events -->
+<div
+	onclick={rollDice}
+	role="button"
+	tabindex="0"
+	class="roller-container"
+	class:active-roll={dieState.isRolling}
+	style:--flash-percent={backgroundFlashPercent}
+>
 	<div class="title-container">
 		<h1 class="dice-value-text">D{dieValue}</h1>
 		{#if dieState.multiplier > 1}
@@ -39,10 +61,9 @@
 	</div>
 	<div class="dice-container">
 		<button onclick={decrementMultiplier} class="accounting-button">-</button>
-		<!-- svelte-ignore a11y_consider_explicit_label -->
-		<button class="dice-button" onclick={rollDice}>
+		<div class="dice-button">
 			<div class="target" bind:this={dieState.target}></div>
-		</button>
+		</div>
 
 		<button onclick={incrementMultiplier} class="accounting-button">+</button>
 	</div>
@@ -56,7 +77,11 @@
 			{/if}
 		</p>
 	{/if}
-	<h1 class="dice-roll-text">
+	<h1
+		class="dice-roll-text"
+		class:rolling-text={dieState.isRolling}
+		style:font-size={dieState.isRolling ? '2svw' : '8svw'}
+	>
 		{rollTotal == 0 ? '--' : rollTotal}
 	</h1>
 </div>
@@ -64,6 +89,7 @@
 <style>
 	h1 {
 		margin: 0;
+		color: var(--onSecondarySurface);
 	}
 
 	p {
@@ -72,6 +98,13 @@
 
 	.dice-value-text {
 		font-size: 5svw;
+		color: var(--onSecondarySurface);
+		transition: font-size 800ms ease-in-out;
+	}
+
+	.rolling-text {
+		color: transparent;
+		font-size: 2svw;
 	}
 
 	.dice-roll-text {
@@ -111,10 +144,25 @@
 		justify-content: center;
 		align-items: center;
 		border-radius: 1em;
-		border: 1px solid white;
 		z-index: 1;
+		color: var(--onSecondarySurface);
+		background: radial-gradient(
+			circle,
+			var(--secondarySurface) var(--rollContainerType),
+			transparent 65%
+		);
+		border: 1px solid transparent;
+	}
 
-		background: radial-gradient(circle, var(--secondarySurface) 35%, transparent 65%);
+	.active-roll {
+		opacity: 0.25;
+		background: radial-gradient(
+			circle,
+			var(--diceHighlightColor),
+			var(--flash-percent),
+			transparent 65%
+		);
+		transition: all 1000ms ease-in-out;
 	}
 
 	.target {

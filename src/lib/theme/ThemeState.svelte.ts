@@ -1,17 +1,25 @@
-import { THEMES, ThemeName } from './ThemeData';
+import { RollContainerType, THEMES, ThemeName } from './ThemeData';
 
 class ThemeManager {
-	currentThemeName = $state<ThemeName>(ThemeName.Midnight);
+	currentThemeName = $state<ThemeName>(ThemeName.Multiverse);
 
 	fullTheme = $derived.by(() => {
 		const theme = THEMES[this.currentThemeName];
 
-		if (!theme) return THEMES[ThemeName.Midnight];
+		if (!theme) return THEMES[ThemeName.Multiverse];
 
 		return {
 			...theme,
+			primary: theme.primary ?? theme.surface,
+			onPrimary: theme.onPrimary ?? theme.onSurface,
+
+			diceHighlightColor: theme.diceHighlightColor ?? theme.primary,
+
+			secondary: theme.secondary ?? theme.primary,
+			onSecondary: theme.onSecondary ?? theme.onPrimary,
 			secondarySurface: theme.secondarySurface ?? theme.surface,
-			secondaryOnSurface: theme.secondaryOnSurface ?? theme.onSurface
+			onSecondarySurface: theme.onSecondarySurface ?? theme.onSurface,
+			rollContainerType: theme.rollContainerType ?? RollContainerType.HollowOrb
 		};
 	});
 

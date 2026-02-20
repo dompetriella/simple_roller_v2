@@ -34,10 +34,10 @@
 		rotation.z={rotationZ}
 		{geometry}
 	>
-		<T.MeshBasicMaterial toneMapped={false} color={themeState.fullTheme.primary} />
+		<T.MeshBasicMaterial toneMapped={false} color={themeState.fullTheme.diceColor} />
 		<T.LineSegments>
 			<T.EdgesGeometry args={[geometry]} />
-			<T.LineBasicMaterial toneMapped={false} color={themeState.fullTheme.onPrimary} />
+			<T.LineBasicMaterial toneMapped={false} color={themeState.fullTheme.diceOutlineColor} />
 		</T.LineSegments>
 	</T.Mesh>
 </View>
