@@ -77,11 +77,7 @@
 			{/if}
 		</p>
 	{/if}
-	<h1
-		class="dice-roll-text"
-		class:rolling-text={dieState.isRolling}
-		style:font-size={dieState.isRolling ? '2svw' : '8svw'}
-	>
+	<h1 class="dice-roll-text" class:rolling-text={dieState.isRolling}>
 		{rollTotal == 0 ? '--' : rollTotal}
 	</h1>
 </div>
@@ -99,12 +95,10 @@
 	.dice-value-text {
 		font-size: 5svw;
 		color: var(--onSecondarySurface);
-		transition: font-size 800ms ease-in-out;
 	}
 
 	.rolling-text {
 		color: transparent;
-		font-size: 2svw;
 	}
 
 	.dice-roll-text {
