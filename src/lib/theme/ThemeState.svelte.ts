@@ -1,12 +1,14 @@
 import { RollContainerType, THEMES, ThemeName } from './ThemeData';
 
+const defaultTheme = ThemeName.Galactic;
+
 class ThemeManager {
-	currentThemeName = $state<ThemeName>(ThemeName.Multiverse);
+	currentThemeName = $state<ThemeName>(defaultTheme);
 
 	fullTheme = $derived.by(() => {
 		const theme = THEMES[this.currentThemeName];
 
-		if (!theme) return THEMES[ThemeName.Multiverse];
+		if (!theme) return THEMES[defaultTheme];
 
 		return {
 			...theme,

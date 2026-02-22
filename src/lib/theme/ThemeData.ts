@@ -1,7 +1,7 @@
 export enum ThemeName {
 	Midnight = 'Midnight',
 	Blinding = 'Blinding',
-	Multiverse = 'Multiverse'
+	Galactic = 'Galactic'
 	// Solar = 'Solar',
 	// Neon = 'Neon'
 }
@@ -31,7 +31,7 @@ export type ThemeColors = {
 };
 
 export const THEMES: Record<ThemeName, ThemeColors> = {
-	[ThemeName.Multiverse]: {
+	[ThemeName.Galactic]: {
 		diceColor: '#FAFAFA',
 		diceOutlineColor: '#101010',
 		diceHighlightColor: '#FA824C',
