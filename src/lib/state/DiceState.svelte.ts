@@ -1,4 +1,4 @@
-import { DICE_VALUES, type DieState } from '$lib/models/DiceState';
+import { DICE_VALUES, type DieState } from '$lib/models/DieState';
 
 const defaultDieState = (overrides: Partial<DieState> = {}): DieState => ({
 	target: undefined,

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { DieState } from '$lib/models/DiceState';
-	import { themeState } from '$lib/theme/ThemeState.svelte';
+	import type { DieState } from '$lib/models/DieState';
+	import { themeState } from '$lib/state/ThemeState.svelte';
 	import { generateRandomInt } from '$lib/utility/Numbers';
 	import { T, useTask } from '@threlte/core';
 	import { View } from '@threlte/extras';

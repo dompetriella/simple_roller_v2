@@ -1,6 +1,7 @@
-import { RollContainerType, THEMES, ThemeName } from './ThemeData';
+import { RollContainerType } from '../models/ThemeData';
+import { ThemeName, THEMES } from '../theme/Themes';
 
-const defaultTheme = ThemeName.Galactic;
+const defaultTheme = ThemeName.Daybreak;
 
 class ThemeManager {
 	currentThemeName = $state<ThemeName>(defaultTheme);

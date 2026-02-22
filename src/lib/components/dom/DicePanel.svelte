@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { DieState } from '$lib/models/DiceState';
+	import type { DieState } from '$lib/models/DieState';
 	import { updateDie } from '$lib/state/DiceState.svelte';
-	import { themeState } from '$lib/theme/ThemeState.svelte';
+	import { themeState } from '$lib/state/ThemeState.svelte';
 	import { clampValue, generateRandomInt } from '$lib/utility/Numbers';
 
 	let {

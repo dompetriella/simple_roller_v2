@@ -2,8 +2,7 @@
 	import { Canvas } from '@threlte/core';
 	import type { Snippet } from 'svelte';
 	import '../app.css';
-	import { themeState } from '$lib/theme/ThemeState.svelte';
-	import { THEMES } from '$lib/theme/ThemeData';
+	import { themeState } from '$lib/state/ThemeState.svelte';
 
 	let { children }: { children: Snippet } = $props();
 
