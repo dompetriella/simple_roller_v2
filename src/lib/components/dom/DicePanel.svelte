@@ -13,7 +13,6 @@
 	} = $props();
 
 	// Value logic
-
 	let shouldAllowMultiplier = $state(false);
 	const rollTotal = $derived(dieState.rollList.reduce((a, b) => a + b, 0));
 
@@ -45,11 +44,9 @@
 
 	// Visual logic
 	const rollingAnimationDuration = 100;
-
 	const backgroundFlashPercent = `${parseFloat(themeState.fullTheme.rollContainerType!) / 10}%`;
 </script>
 
-<!-- svelte-ignore a11y_click_events_have_key_events -->
 <div
 	onpointerdown={prepareDiceRoll}
 	onpointerup={commitDiceRoll}
@@ -85,9 +82,11 @@
 			>
 		{/if}
 	</div>
-
+	<h1 class="dice-roll-text" class:rolling-text={dieState.isRolling}>
+		{rollTotal == 0 ? '--' : rollTotal}
+	</h1>
 	{#if shouldAllowMultiplier}
-		<p class="dice-roll-list-text">
+		<p class="dice-roll-list-text" class:rolling-text={dieState.isRolling}>
 			{#if dieState.rollList.length > 1}
 				[{dieState.rollList.join(' + ')}]
 			{:else}
@@ -95,9 +94,6 @@
 			{/if}
 		</p>
 	{/if}
-	<h1 class="dice-roll-text" class:rolling-text={dieState.isRolling}>
-		{rollTotal == 0 ? '--' : rollTotal}
-	</h1>
 </div>
 
 <style>
@@ -127,6 +123,12 @@
 		transform-origin: center;
 	}
 
+	.dice-roll-list-text {
+		font-size: 0.75em;
+		text-align: center;
+		width: 38svw;
+	}
+
 	.dice-button {
 		border: none;
 		background-color: transparent;
@@ -134,7 +136,7 @@
 
 	.accounting-button {
 		border: none;
-		background-color: green;
+		background-color: transparent;
 		color: var(--onSecondarySurface);
 		width: 100%;
 	}

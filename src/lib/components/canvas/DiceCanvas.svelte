@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { Canvas, T } from '@threlte/core';
 	import DiceView from './DiceView.svelte';
-	import { DICE_VALUES } from '$lib/models/DiceState';
 	import { DiceState } from '$lib/state/DiceState.svelte';
 	import {
 		BoxGeometry,
