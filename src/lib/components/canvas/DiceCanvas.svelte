@@ -10,6 +10,9 @@
 		OctahedronGeometry,
 		TetrahedronGeometry
 	} from 'three';
+	import { createD10Geometry } from '$lib/utility/D10Geometry';
+
+	const d10Geometry = createD10Geometry();
 </script>
 
 <div class="canvas">
@@ -27,7 +30,7 @@
 			<DiceView dieState={DiceState[8]} geometry={new OctahedronGeometry()}></DiceView>
 		{/if}
 		{#if DiceState[10].target}
-			<DiceView dieState={DiceState[10]} geometry={new BoxGeometry()}></DiceView>
+			<DiceView dieState={DiceState[10]} geometry={createD10Geometry()}></DiceView>
 		{/if}
 		{#if DiceState[12].target}
 			<DiceView dieState={DiceState[12]} geometry={new DodecahedronGeometry()}></DiceView>
