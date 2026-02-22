@@ -6,8 +6,6 @@
 
 	let { children }: { children: Snippet } = $props();
 
-	$inspect(themeState.currentThemeName);
-
 	let globalCssVars = $derived(
 		Object.entries(themeState.fullTheme)
 			.map(([key, value]) => `--${key}: ${value};`)

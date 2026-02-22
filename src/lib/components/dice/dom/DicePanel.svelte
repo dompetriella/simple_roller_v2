@@ -113,7 +113,7 @@
 
 	.rolling-text {
 		color: transparent;
-		transform: scale(2);
+		transform: scale(2.5);
 	}
 
 	.dice-roll-text {

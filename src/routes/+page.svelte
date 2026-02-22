@@ -5,34 +5,53 @@
 	import { DiceState } from '$lib/state/DiceState.svelte';
 </script>
 
-<div class="container">
+<main>
 	<Backdrop />
-	<div>
-		<div class="row">
-			<DicePanel dieValue={20} dieState={DiceState[20]} />
-			<DicePanel dieValue={6} dieState={DiceState[6]} />
-		</div>
-		<div class="row">
-			<DicePanel dieValue={4} dieState={DiceState[4]} />
-			<DicePanel dieValue={8} dieState={DiceState[8]} />
-		</div>
-		<div class="row">
-			<DicePanel dieValue={10} dieState={DiceState[10]} />
-			<DicePanel dieValue={12} dieState={DiceState[12]} />
+	<nav></nav>
+	<div class="dice-container">
+		<div>
+			<div class="row">
+				<DicePanel dieValue={20} dieState={DiceState[20]} />
+				<DicePanel dieValue={6} dieState={DiceState[6]} />
+			</div>
+			<div class="row">
+				<DicePanel dieValue={4} dieState={DiceState[4]} />
+				<DicePanel dieValue={8} dieState={DiceState[8]} />
+			</div>
+			<div class="row">
+				<DicePanel dieValue={10} dieState={DiceState[10]} />
+				<DicePanel dieValue={12} dieState={DiceState[12]} />
+			</div>
 		</div>
 	</div>
-</div>
+</main>
 
 <DiceCanvas />
 
 <style>
-	.container {
+	main {
 		width: 100svw;
 		height: 100svh;
+		background-color: var(--surface);
+		display: flex;
+		flex-direction: column;
+		justify-content: start;
+	}
+
+	nav {
+		background-color: var(--surface);
+		border-bottom: 1px solid var(--onSurface);
+		height: 10svw;
+		z-index: 1;
+	}
+
+	.dice-container {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		background-color: var(--surface);
+		align-items: stretch;
+		height: 100%;
+		z-index: 1;
 	}
 
 	.row {
