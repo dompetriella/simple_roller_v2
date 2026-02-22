@@ -1,7 +1,7 @@
 import { type ThemeColors } from '../models/ThemeData';
 
 export enum ThemeName {
-	Twilight = 'Twilight',
+	Midnight = 'Midnight',
 	Daybreak = 'Daybreak',
 	Galactic = 'Galactic'
 	// Solar = 'Solar',
@@ -21,7 +21,7 @@ export const THEMES: Record<ThemeName, ThemeColors> = {
 		secondary: '#220135',
 		onSecondary: '#FAFAFA'
 	},
-	[ThemeName.Twilight]: {
+	[ThemeName.Midnight]: {
 		diceColor: '#101010',
 		diceOutlineColor: '#FAFAFA',
 		diceHighlightColor: '#FAFAFA',

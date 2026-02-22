@@ -1,7 +1,7 @@
 <script lang="ts">
-	import DiceCanvas from '$lib/components/canvas/DiceCanvas.svelte';
-	import Backdrop from '$lib/components/dom/Backdrop.svelte';
-	import DicePanel from '$lib/components/dom/DicePanel.svelte';
+	import Backdrop from '$lib/components/Backdrop.svelte';
+	import DiceCanvas from '$lib/components/dice/canvas/DiceCanvas.svelte';
+	import DicePanel from '$lib/components/dice/dom/DicePanel.svelte';
 	import { DiceState } from '$lib/state/DiceState.svelte';
 </script>
 
