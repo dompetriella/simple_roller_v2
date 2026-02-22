@@ -2,7 +2,7 @@
 	import type { DieState } from '$lib/models/DiceState';
 	import { updateDie } from '$lib/state/DiceState.svelte';
 	import { themeState } from '$lib/theme/ThemeState.svelte';
-	import { clampValue, generateRandomInt } from '$lib/utility/numbers';
+	import { clampValue, generateRandomInt } from '$lib/utility/Numbers';
 
 	let {
 		dieValue,
@@ -14,39 +14,45 @@
 
 	// Value logic
 
-	const shouldAllowMultiplier = $state(false);
+	let shouldAllowMultiplier = $state(false);
 	const rollTotal = $derived(dieState.rollList.reduce((a, b) => a + b, 0));
 
-	const decrementMultiplier = (e: MouseEvent) => {
+	const stopPropagation = (e: PointerEvent) => e.stopPropagation();
+
+	const decrementMultiplier = (e: PointerEvent) => {
 		e.stopPropagation();
 		updateDie(dieValue, { multiplier: clampValue(dieState.multiplier - 1, 1, 100) });
 	};
 
-	const incrementMultiplier = (e: MouseEvent) => {
+	const incrementMultiplier = (e: PointerEvent) => {
 		e.stopPropagation();
 		updateDie(dieValue, { multiplier: clampValue(dieState.multiplier + 1, 1, 100) });
 	};
 
-	const rollDice = () => {
+	const prepareDiceRoll = () => {
+		dieState.isRolling = true;
+	};
+
+	const commitDiceRoll = () => {
 		updateDie(dieValue, {
 			rollList: Array.from({ length: dieState.multiplier }, () => generateRandomInt(1, dieValue))
 		});
-		dieState.isRolling = true;
+
 		setTimeout(() => {
 			dieState.isRolling = false;
 		}, rollingAnimationDuration);
 	};
 
 	// Visual logic
+	const rollingAnimationDuration = 100;
 
-	const rollingAnimationDuration = 250;
-
-	const backgroundFlashPercent = `${parseFloat(themeState.fullTheme.rollContainerType!) / 4}%`;
+	const backgroundFlashPercent = `${parseFloat(themeState.fullTheme.rollContainerType!) / 10}%`;
 </script>
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <div
-	onclick={rollDice}
+	onpointerdown={prepareDiceRoll}
+	onpointerup={commitDiceRoll}
 	role="button"
 	tabindex="0"
 	class="roller-container"
@@ -60,12 +66,24 @@
 		{/if}
 	</div>
 	<div class="dice-container">
-		<button onclick={decrementMultiplier} class="accounting-button">-</button>
+		{#if shouldAllowMultiplier}
+			<button
+				onpointerdown={decrementMultiplier}
+				onpointerup={stopPropagation}
+				class="accounting-button">-</button
+			>
+		{/if}
 		<div class="dice-button">
 			<div class="target" bind:this={dieState.target}></div>
 		</div>
 
-		<button onclick={incrementMultiplier} class="accounting-button">+</button>
+		{#if shouldAllowMultiplier}
+			<button
+				onpointerdown={incrementMultiplier}
+				onpointerup={stopPropagation}
+				class="accounting-button">+</button
+			>
+		{/if}
 	</div>
 
 	{#if shouldAllowMultiplier}
@@ -99,11 +117,14 @@
 
 	.rolling-text {
 		color: transparent;
+		transform: scale(2);
 	}
 
 	.dice-roll-text {
 		padding-top: 1svw;
 		font-size: 8svw;
+		transition: transform 0.2s ease-out;
+		transform-origin: center;
 	}
 
 	.dice-button {
@@ -113,7 +134,7 @@
 
 	.accounting-button {
 		border: none;
-		background-color: transparent;
+		background-color: green;
 		color: var(--onSecondarySurface);
 		width: 100%;
 	}
@@ -126,7 +147,7 @@
 
 	.dice-container {
 		display: flex;
-		justify-content: stretch;
+		justify-content: space-evenly;
 		width: 100%;
 	}
 
@@ -156,7 +177,7 @@
 			var(--flash-percent),
 			transparent 65%
 		);
-		transition: all 1000ms ease-in-out;
+		transition: all 500ms ease-in-out;
 	}
 
 	.target {

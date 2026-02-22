@@ -40,8 +40,8 @@ export const THEMES: Record<ThemeName, ThemeColors> = {
 		onSurface: '#FAFAFA',
 		primary: '#642CA9',
 		onPrimary: '#FAFAFA',
-		secondary: '#FA824C',
-		onSecondary: '#101010'
+		secondary: '#220135',
+		onSecondary: '#FAFAFA'
 	},
 	[ThemeName.Midnight]: {
 		diceColor: '#101010',
