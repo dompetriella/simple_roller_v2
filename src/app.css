@@ -1,17 +1,14 @@
 /* src/app.css */
 :root {
-  --primary-color: #ff3e00;
   --font-main: 'Inter', sans-serif;
-  color: white;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
   font-family: var(--font-main);
-  background-color: #1E1E1E;
   margin: 0px;
   padding: 0px;
-}
-
-h1 {
-    color: white;
 }
