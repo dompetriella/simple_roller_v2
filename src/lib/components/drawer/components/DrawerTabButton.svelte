@@ -8,6 +8,7 @@
 <button
 	onclick={() => drawerState.changeTab(tab)}
 	class:current-tab={drawerState.currentTab == tab}
+	aria-label={`${tab} Tab`}
 >
 	{@render children()}</button
 >

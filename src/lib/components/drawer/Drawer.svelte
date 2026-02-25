@@ -1,6 +1,10 @@
 <script>
 	import { drawerState, DrawerTab } from '$lib/state/DrawerState.svelte';
 	import DrawerTabButton from './components/DrawerTabButton.svelte';
+	import History from './components/history/History.svelte';
+	import Settings from './components/settings/Settings.svelte';
+	import SettingsTab from './components/settings/Settings.svelte';
+	import Themes from './components/themes/Themes.svelte';
 </script>
 
 <div class="container">
@@ -26,14 +30,28 @@
 			<DrawerTabButton tab={DrawerTab.History}>
 				<IconLucideScrollText />
 			</DrawerTabButton>
-			<DrawerTabButton tab={DrawerTab.Stats}>
+			<!-- <DrawerTabButton tab={DrawerTab.Stats}>
 				<IconLucideBarChart />
-			</DrawerTabButton>
+			</DrawerTabButton> -->
 		</div>
+		<h1>{drawerState.currentTab}</h1>
+		{#key drawerState.currentTab}
+			{#if drawerState.currentTab == DrawerTab.Settings}
+				<Settings />
+			{:else if drawerState.currentTab == DrawerTab.Themes}
+				<Themes />
+			{:else if drawerState.currentTab == DrawerTab.History}
+				<History />
+			{/if}
+		{/key}
 	</aside>
 </div>
 
 <style>
+	h1 {
+		color: var(--onSurface);
+	}
+
 	.drawer-barrier {
 		position: absolute;
 		height: 100%;
@@ -56,6 +74,7 @@
 
 		display: flex;
 		flex-direction: column;
+		align-items: center;
 		padding: 1em;
 
 		transform: translateX(100%);

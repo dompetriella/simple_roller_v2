@@ -29,14 +29,13 @@
 	const idleScale = 2.4;
 
 	// Initial Color Values
-	const theme = themeState.fullTheme;
 	let dieMaterial: MeshBasicMaterial = $state(new MeshBasicMaterial());
 	let outlineMaterial: LineBasicMaterial = $state(new LineBasicMaterial());
 
-	const initialDieColor = new Color(theme.diceColor);
-	const dieHighlightColor = new Color(theme.diceHighlightColor);
-	const initialDieOutlineColor = new Color(theme.diceOutlineColor);
-	const dieHighlightOutlineColor = new Color(theme.diceColor);
+	const initialDieColor = $derived(new Color(themeState.fullTheme.diceColor));
+	const dieHighlightColor = $derived(new Color(themeState.fullTheme.diceHighlightColor));
+	const initialDieOutlineColor = $derived(new Color(themeState.fullTheme.diceOutlineColor));
+	const dieHighlightOutlineColor = $derived(new Color(themeState.fullTheme.diceColor));
 
 	useTask((delta) => {
 		let targetSpeed = dieState.isRolling ? rollSpeed : idleSpeed;
