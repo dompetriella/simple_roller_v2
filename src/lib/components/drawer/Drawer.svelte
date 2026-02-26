@@ -34,7 +34,6 @@
 				<IconLucideBarChart />
 			</DrawerTabButton> -->
 		</div>
-		<h1>{drawerState.currentTab}</h1>
 		{#key drawerState.currentTab}
 			{#if drawerState.currentTab == DrawerTab.Settings}
 				<Settings />

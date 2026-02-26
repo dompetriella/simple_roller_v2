@@ -22,10 +22,8 @@
 		background-color: var(--surface);
 		color: var(--onSurface);
 
-		border-top: 1px solid var(--surface);
-		border-left: 1px solid var(--surface);
-		border-right: 1px solid var(--surface);
-		border-top: none;
+		border: 1px solid var(--surface);
+
 		border-top-left-radius: 10%;
 		border-top-right-radius: 10%;
 		border-bottom-left-radius: 0%;
