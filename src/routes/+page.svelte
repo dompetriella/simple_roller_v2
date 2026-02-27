@@ -2,18 +2,17 @@
 	import Backdrop from '$lib/components/Backdrop.svelte';
 	import DiceCanvas from '$lib/components/dice/canvas/DiceCanvas.svelte';
 	import DiceContainer from '$lib/components/dice/dom/DiceContainer.svelte';
-	import DicePanel from '$lib/components/dice/dom/DicePanel.svelte';
+	import DicePanel from '$lib/components/dice/dom/components/DicePanel.svelte';
 	import Drawer from '$lib/components/drawer/Drawer.svelte';
 	import Navbar from '$lib/components/navbar/Navbar.svelte';
-	import { DiceState } from '$lib/state/DiceState.svelte';
-	import { drawerState } from '$lib/state/DrawerState.svelte';
 </script>
 
 <main>
 	<Backdrop />
 	<Drawer />
-	<Navbar />
+
 	<DiceContainer />
+	<Navbar />
 </main>
 
 <DiceCanvas />

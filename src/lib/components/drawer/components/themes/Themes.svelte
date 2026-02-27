@@ -4,7 +4,7 @@
 	import ThemeSelect from './components/ThemeSelect.svelte';
 </script>
 
-<fieldset>
+<section>
 	<h1>Themes</h1>
 	<h2>Current: {themeState.currentThemeName}</h2>
 
@@ -13,7 +13,7 @@
 			<ThemeSelect themeName={name} themePalette={theme} />
 		{/each}
 	</div>
-</fieldset>
+</section>
 
 <style>
 	h1 {
@@ -31,7 +31,7 @@
 		padding-bottom: 2em;
 	}
 
-	fieldset {
+	section {
 		border: none;
 
 		display: flex;

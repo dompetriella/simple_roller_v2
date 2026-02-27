@@ -3,7 +3,7 @@ import { ThemeName, THEMES } from '../theme/Themes';
 
 const defaultTheme = ThemeName.Midnight;
 
-class ThemeManager {
+class ThemeState {
 	currentThemeName = $state<ThemeName>(defaultTheme);
 
 	fullTheme = $derived.by(() => {
@@ -31,4 +31,4 @@ class ThemeManager {
 	}
 }
 
-export const themeState = new ThemeManager();
+export const themeState = new ThemeState();

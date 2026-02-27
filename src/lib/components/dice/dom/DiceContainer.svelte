@@ -1,21 +1,21 @@
 <script>
-	import { DiceState } from '$lib/state/DiceState.svelte';
-	import DicePanel from './DicePanel.svelte';
+	import { diceState } from '$lib/state/DiceState.svelte';
+	import DicePanel from './components/DicePanel.svelte';
 </script>
 
 <div class="dice-container">
 	<div>
 		<div class="row">
-			<DicePanel dieValue={20} dieState={DiceState[20]} />
-			<DicePanel dieValue={6} dieState={DiceState[6]} />
+			<DicePanel dieValue={20} dieState={diceState.data[20]} />
+			<DicePanel dieValue={6} dieState={diceState.data[6]} />
 		</div>
 		<div class="row">
-			<DicePanel dieValue={4} dieState={DiceState[4]} />
-			<DicePanel dieValue={8} dieState={DiceState[8]} />
+			<DicePanel dieValue={4} dieState={diceState.data[4]} />
+			<DicePanel dieValue={8} dieState={diceState.data[8]} />
 		</div>
 		<div class="row">
-			<DicePanel dieValue={10} dieState={DiceState[10]} />
-			<DicePanel dieValue={12} dieState={DiceState[12]} />
+			<DicePanel dieValue={10} dieState={diceState.data[10]} />
+			<DicePanel dieValue={12} dieState={diceState.data[12]} />
 		</div>
 	</div>
 </div>

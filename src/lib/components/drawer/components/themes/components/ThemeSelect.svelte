@@ -5,9 +5,16 @@
 
 	let { themeName, themePalette }: { themeName: string; themePalette: ThemeColors } = $props();
 
-	const uniquePalette = $derived(
-		[...new Set(Object.values(themePalette))].filter((v) => v?.toString().startsWith('#'))
-	);
+	const paletteKeys: (keyof ThemeColors)[] = [
+		'surface',
+		'primary',
+		'diceColor',
+		'diceHighlightColor'
+	];
+
+	let uniquePalette = $derived([
+		...new Set(paletteKeys.map((key) => themePalette[key]).filter(Boolean))
+	] as string[]);
 </script>
 
 <button

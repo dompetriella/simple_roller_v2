@@ -20,37 +20,35 @@
 		></button>
 	{/if}
 	<aside class="drawer" class:drawer-open={drawerState.isOpen}>
-		<div class="tabs-container">
-			<DrawerTabButton tab={DrawerTab.Settings}>
-				<IconLucideSettings />
-			</DrawerTabButton>
-			<DrawerTabButton tab={DrawerTab.Themes}>
-				<IconLucidePalette />
-			</DrawerTabButton>
-			<DrawerTabButton tab={DrawerTab.History}>
-				<IconLucideScrollText />
-			</DrawerTabButton>
-			<!-- <DrawerTabButton tab={DrawerTab.Stats}>
+		<div class="drawer-content">
+			<div class="tabs-container">
+				<DrawerTabButton tab={DrawerTab.Settings}>
+					<IconLucideSettings />
+				</DrawerTabButton>
+				<DrawerTabButton tab={DrawerTab.Themes}>
+					<IconLucidePalette />
+				</DrawerTabButton>
+				<DrawerTabButton tab={DrawerTab.History}>
+					<IconLucideScrollText />
+				</DrawerTabButton>
+				<!-- <DrawerTabButton tab={DrawerTab.Stats}>
 				<IconLucideBarChart />
 			</DrawerTabButton> -->
+			</div>
+			{#key drawerState.currentTab}
+				{#if drawerState.currentTab == DrawerTab.Settings}
+					<Settings />
+				{:else if drawerState.currentTab == DrawerTab.Themes}
+					<Themes />
+				{:else if drawerState.currentTab == DrawerTab.History}
+					<History />
+				{/if}
+			{/key}
 		</div>
-		{#key drawerState.currentTab}
-			{#if drawerState.currentTab == DrawerTab.Settings}
-				<Settings />
-			{:else if drawerState.currentTab == DrawerTab.Themes}
-				<Themes />
-			{:else if drawerState.currentTab == DrawerTab.History}
-				<History />
-			{/if}
-		{/key}
 	</aside>
 </div>
 
 <style>
-	h1 {
-		color: var(--onSurface);
-	}
-
 	.drawer-barrier {
 		position: absolute;
 		height: 100%;
@@ -67,21 +65,24 @@
 		width: 75svw;
 		height: 100svh;
 		background-color: color-mix(in srgb, var(--surface), transparent 10%);
-
 		border-left: 1px solid var(--onSurface);
 		z-index: 10;
-
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		padding: 1em;
-
 		transform: translateX(100%);
 		transition: transform 200ms ease-out;
 	}
 
 	.drawer-open {
 		transform: translateX(0%);
+	}
+
+	.drawer-content {
+		width: 100%;
+		height: 100%;
+		padding: 1em;
+
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 
 	.tabs-container {

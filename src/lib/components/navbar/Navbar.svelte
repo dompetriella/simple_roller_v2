@@ -4,20 +4,36 @@
 
 <nav>
 	<button onclick={() => drawerState.toggle()} class="settings-button">
-		<IconLucideSettings />
+		<h1>Options</h1>
+		<div class="icon">
+			<IconLucideSparkles />
+		</div>
 	</button>
 </nav>
 
 <style>
+	h1 {
+		padding: 0px;
+		margin: 0px;
+	}
+
 	nav {
-		background-color: var(--surface);
-		border-bottom: 2px solid var(--onSurface);
-		height: 3em;
+		border-top: 2px solid var(--onSurface);
+		height: 25svw;
 		padding: 0.5em;
 		z-index: 1;
 		display: flex;
-		justify-content: end;
+		justify-content: center;
 		align-items: center;
+	}
+
+	.icon {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 15svw;
+		width: 15svw;
+		font-size: 6svw;
 	}
 
 	.settings-button {

@@ -6,10 +6,14 @@
 // biome-ignore lint: disable
 export {}
 declare global {
+  const IconLucideArrowBigRight: typeof import('~icons/lucide/arrow-big-right.svelte').default
   const IconLucideBarChart: typeof import('~icons/lucide/bar-chart.svelte').default
+  const IconLucideBarchart: typeof import('~icons/lucide/barchart.svelte').default
+  const IconLucideChevronRight: typeof import('~icons/lucide/chevron-right.svelte').default
   const IconLucideHistory: typeof import('~icons/lucide/history.svelte').default
   const IconLucidePaintbrush: typeof import('~icons/lucide/paintbrush.svelte').default
   const IconLucidePalette: typeof import('~icons/lucide/palette.svelte').default
   const IconLucideScrollText: typeof import('~icons/lucide/scroll-text.svelte').default
   const IconLucideSettings: typeof import('~icons/lucide/settings.svelte').default
+  const IconLucideSparkles: typeof import('~icons/lucide/sparkles.svelte').default
 }

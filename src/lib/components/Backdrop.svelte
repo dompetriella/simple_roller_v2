@@ -9,6 +9,7 @@
 		width: 100%;
 		position: absolute;
 		background-color: var(--surface);
+		transition: background-color 400ms ease-in-out;
 	}
 
 	.backdrop {
@@ -22,6 +23,7 @@
 		background-color: var(--primary);
 		filter: blur(20svw);
 		opacity: 0.5;
+		transition: background-color 400ms ease-in-out;
 	}
 
 	.alt {

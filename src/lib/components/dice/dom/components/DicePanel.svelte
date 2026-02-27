@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { DieState } from '$lib/models/DieState';
-	import { updateDie } from '$lib/state/DiceState.svelte';
+	import { diceState } from '$lib/state/DiceState.svelte';
 	import { themeState } from '$lib/state/ThemeState.svelte';
 	import { clampValue, generateRandomInt } from '$lib/utility/Numbers';
 
@@ -20,25 +20,25 @@
 
 	const decrementMultiplier = (e: PointerEvent) => {
 		e.stopPropagation();
-		updateDie(dieValue, { multiplier: clampValue(dieState.multiplier - 1, 1, 100) });
+		diceState.updateDie(dieValue, { multiplier: clampValue(dieState.multiplier - 1, 1, 100) });
 	};
 
 	const incrementMultiplier = (e: PointerEvent) => {
 		e.stopPropagation();
-		updateDie(dieValue, { multiplier: clampValue(dieState.multiplier + 1, 1, 100) });
+		diceState.updateDie(dieValue, { multiplier: clampValue(dieState.multiplier + 1, 1, 100) });
 	};
 
 	const prepareDiceRoll = () => {
-		dieState.isRolling = true;
+		diceState.setRollingStatus(dieValue, true);
 	};
 
 	const commitDiceRoll = () => {
-		updateDie(dieValue, {
+		diceState.updateDie(dieValue, {
 			rollList: Array.from({ length: dieState.multiplier }, () => generateRandomInt(1, dieValue))
 		});
 
 		setTimeout(() => {
-			dieState.isRolling = false;
+			diceState.setRollingStatus(dieValue, false);
 		}, rollingAnimationDuration);
 	};
 

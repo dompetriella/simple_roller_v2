@@ -19,7 +19,7 @@
 		flex-grow: 1;
 		font-size: 1em;
 
-		background-color: var(--surface);
+		background-color: transparent;
 		color: var(--onSurface);
 
 		border: 1px solid var(--surface);
@@ -28,6 +28,7 @@
 		border-top-right-radius: 10%;
 		border-bottom-left-radius: 0%;
 		border-bottom-right-radius: 0%;
+		transition: border-color 400ms ease-out;
 	}
 
 	.current-tab {
