@@ -1,13 +1,17 @@
 <script>
-	import { SettingsKey } from '$lib/state/SettingsState.svelte';
+	import { SETTINGS_CONFIG } from '$lib/models/Settings';
 	import SettingsToggle from './components/SettingsToggle.svelte';
+
+	const allSettings = Object.values(SETTINGS_CONFIG);
 </script>
 
 <section>
 	<h1>Settings</h1>
-	<div class="settings-content">
-		<SettingsToggle settingsKey={SettingsKey.AllowMultipleDice} />
-	</div>
+	{#each allSettings as setting}
+		<div class="settings-content">
+			<SettingsToggle configuration={setting} />
+		</div>
+	{/each}
 </section>
 
 <style>

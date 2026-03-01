@@ -1,6 +1,8 @@
 <script lang="ts">
-	import type { DieState } from '$lib/models/DieState';
+	import type { DieData } from '$lib/models/DieData';
+	import { SettingsKeys } from '$lib/models/Settings';
 	import { diceState } from '$lib/state/DiceState.svelte';
+	import { settingsState } from '$lib/state/SettingsState.svelte';
 	import { themeState } from '$lib/state/ThemeState.svelte';
 	import { clampValue, generateRandomInt } from '$lib/utility/Numbers';
 
@@ -9,11 +11,11 @@
 		dieState
 	}: {
 		dieValue: number;
-		dieState: DieState;
+		dieState: DieData;
 	} = $props();
 
 	// Value logic
-	let shouldAllowMultiplier = $state(false);
+	let shouldAllowMultiplier = $derived(settingsState.data[SettingsKeys.AllowMultipleDice]);
 	const rollTotal = $derived(dieState.rollList.reduce((a, b) => a + b, 0));
 
 	const stopPropagation = (e: PointerEvent) => e.stopPropagation();

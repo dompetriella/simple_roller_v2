@@ -1,8 +1,13 @@
-import type { Component, Snippet } from 'svelte';
+export enum DiceType {
+	D4 = 4,
+	D6 = 6,
+	D8 = 8,
+	D10 = 10,
+	D12 = 12,
+	D20 = 20
+}
 
-export const DICE_VALUES = [20, 6, 4, 8, 10, 12];
-
-export type DieState = {
+export type DieData = {
 	target: HTMLDivElement | undefined;
 
 	multiplier: number;

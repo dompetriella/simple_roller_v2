@@ -28,7 +28,7 @@
 		border-top-right-radius: 10%;
 		border-bottom-left-radius: 0%;
 		border-bottom-right-radius: 0%;
-		transition: border-color 400ms ease-out;
+		transition: border-color 200ms ease-out;
 	}
 
 	.current-tab {

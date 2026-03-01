@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { DieState } from '$lib/models/DieState';
+	import type { DieData } from '$lib/models/DieData';
 	import { themeState } from '$lib/state/ThemeState.svelte';
 	import { generateRandomInt } from '$lib/utility/Numbers';
 	import { T, useTask } from '@threlte/core';
@@ -10,7 +10,7 @@
 		dieState,
 		geometry
 	}: {
-		dieState: DieState;
+		dieState: DieData;
 		geometry: any;
 	} = $props();
 

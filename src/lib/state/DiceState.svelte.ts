@@ -1,6 +1,6 @@
-import { DICE_VALUES, type DieState } from '$lib/models/DieState';
+import type { DieData } from '$lib/models/DieData';
 
-const createDefaultDie = (overrides: Partial<DieState> = {}): DieState => ({
+const createDefaultDie = (overrides: Partial<DieData> = {}): DieData => ({
 	target: undefined,
 	multiplier: 1,
 	rollList: [],
@@ -11,7 +11,7 @@ const createDefaultDie = (overrides: Partial<DieState> = {}): DieState => ({
 });
 
 class DiceState {
-	data = $state<Record<number, DieState>>({
+	data = $state<Record<number, DieData>>({
 		4: createDefaultDie(),
 		6: createDefaultDie(),
 		8: createDefaultDie(),
@@ -20,7 +20,7 @@ class DiceState {
 		20: createDefaultDie()
 	});
 
-	updateDie(id: number, updatedState: Partial<DieState>) {
+	updateDie(id: number, updatedState: Partial<DieData>) {
 		if (this.data[id]) {
 			Object.assign(this.data[id], updatedState);
 		}

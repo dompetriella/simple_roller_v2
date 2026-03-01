@@ -62,13 +62,15 @@
 		position: fixed;
 		top: 0;
 		right: 0;
-		width: 75svw;
+		width: 80svw;
 		height: 100svh;
 		background-color: color-mix(in srgb, var(--surface), transparent 10%);
 		border-left: 1px solid var(--onSurface);
 		z-index: 10;
 		transform: translateX(100%);
-		transition: transform 200ms ease-out;
+		transition:
+			transform 200ms ease-out,
+			background-color 400ms ease-in-out;
 	}
 
 	.drawer-open {

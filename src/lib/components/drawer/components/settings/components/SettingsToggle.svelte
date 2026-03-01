@@ -1,22 +1,30 @@
 <script lang="ts">
-	import { SettingsKey, settingsState } from '$lib/state/SettingsState.svelte';
+	import type { SettingDefinition } from '$lib/models/Settings';
+	import { settingsState } from '$lib/state/SettingsState.svelte';
 
-	let { settingsKey }: { settingsKey: SettingsKey } = $props();
+	let { configuration }: { configuration: SettingDefinition } = $props();
 
-	let settingsValue = $derived(settingsState.data[settingsKey as SettingsKey]);
+	let isExpanded = $state(false);
+
+	let settingsValue = $derived(settingsState.data[configuration.id]);
 </script>
 
 <fieldset>
-	<button class="info-button">
-		<div class="chevron-icon">
-			<IconLucideChevronRight />
-		</div>
+	<button class="info-button" onclick={() => (isExpanded = !isExpanded)}>
+		<div class="info-container">
+			<div class="chevron-icon" class:chevron-expanded={isExpanded}>
+				<IconLucideChevronRight />
+			</div>
 
-		<h3>{settingsKey} [{settingsValue}]</h3>
+			<h3>{configuration.title}</h3>
+		</div>
+		{#if isExpanded}
+			<div class="expanded-info-container">{configuration.description}</div>
+		{/if}
 	</button>
 
 	<button
-		onclick={() => settingsState.updateValue(settingsKey, !settingsValue)}
+		onclick={() => settingsState.updateValue(configuration.id, !settingsValue)}
 		class="switch-container"
 		aria-checked={settingsValue}
 		role="switch"
@@ -46,10 +54,12 @@
 	h3 {
 		text-align: start;
 		font-size: 0.75em;
+		font-weight: 200;
 	}
 
 	.info-button {
 		display: flex;
+		flex-direction: column;
 		justify-content: start;
 		align-items: center;
 		flex: 6;
@@ -62,6 +72,19 @@
 		color: var(--onSurface);
 	}
 
+	.info-container {
+		width: 100%;
+		display: flex;
+		justify-content: start;
+		gap: 0.5em;
+	}
+
+	.expanded-info-container {
+		text-align: start;
+		font-size: 0.75em;
+		font-weight: 100;
+	}
+
 	h3 {
 		margin: 0px;
 		padding: 0px;
@@ -70,6 +93,7 @@
 
 	.switch-container {
 		display: flex;
+		align-items: center;
 		flex: 2;
 		padding: 1em;
 		border: none;
@@ -107,5 +131,15 @@
 	.switch-toggle-on {
 		transform: translateX(2em);
 		background-color: var(--diceHighlightColor);
+	}
+
+	.chevron-icon {
+		transition: transform 100ms linear;
+	}
+
+	.chevron-expanded {
+		transform: rotate(90deg);
+
+		transition: transform 100ms linear;
 	}
 </style>

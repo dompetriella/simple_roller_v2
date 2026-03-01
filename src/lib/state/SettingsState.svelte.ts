@@ -1,22 +1,11 @@
-export enum SettingsKey {
-	AllowMultipleDice = 'Allow Multiple Dice',
-	BatterySaver = 'Battery Saver'
-}
-
-interface SettingsMap {
-	[SettingsKey.AllowMultipleDice]: boolean;
-	[SettingsKey.BatterySaver]: boolean;
-}
+import { SETTINGS_CONFIG, SettingsKeys } from '$lib/models/Settings';
 
 class SettingsState {
-	data = $state<SettingsMap>({
-		[SettingsKey.AllowMultipleDice]: false,
-		[SettingsKey.BatterySaver]: false
-	});
+	data = $state<Record<string, any>>(
+		Object.fromEntries(Object.values(SETTINGS_CONFIG).map((s) => [s.id, s.defaultValue]))
+	);
 
-	updateValue<K extends SettingsKey>(key: K, value: SettingsMap[K]) {
-		console.log(key);
-		console.log(value);
+	updateValue(key: string, value: any) {
 		this.data[key] = value;
 	}
 }
