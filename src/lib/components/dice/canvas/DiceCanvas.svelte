@@ -10,29 +10,35 @@
 	} from 'three';
 	import { createD10Geometry } from '$lib/utility/D10Geometry';
 	import { diceState } from '$lib/state/DiceState.svelte';
+	import { DiceType } from '$lib/models/DieData';
 
-	const d10Geometry = createD10Geometry();
+	let d20Data = $derived(diceState.data[DiceType.D20]);
+	let d6Data = $derived(diceState.data[DiceType.D6]);
+	let d4Data = $derived(diceState.data[DiceType.D4]);
+	let d8Data = $derived(diceState.data[DiceType.D8]);
+	let d10Data = $derived(diceState.data[DiceType.D10]);
+	let d12Data = $derived(diceState.data[DiceType.D12]);
 </script>
 
 <div class="canvas">
 	<Canvas>
-		{#if diceState.data[20].target}
-			<DiceView dieState={diceState.data[20]} geometry={new IcosahedronGeometry()}></DiceView>
+		{#if d20Data.target}
+			<DiceView dieState={d20Data} geometry={new IcosahedronGeometry()}></DiceView>
 		{/if}
-		{#if diceState.data[6].target}
-			<DiceView dieState={diceState.data[6]} geometry={new BoxGeometry()}></DiceView>
+		{#if d6Data.target}
+			<DiceView dieState={d6Data} geometry={new BoxGeometry()}></DiceView>
 		{/if}
-		{#if diceState.data[4].target}
-			<DiceView dieState={diceState.data[4]} geometry={new TetrahedronGeometry()}></DiceView>
+		{#if d4Data.target}
+			<DiceView dieState={d4Data} geometry={new TetrahedronGeometry()}></DiceView>
 		{/if}
-		{#if diceState.data[8].target}
-			<DiceView dieState={diceState.data[8]} geometry={new OctahedronGeometry()}></DiceView>
+		{#if d8Data.target}
+			<DiceView dieState={d8Data} geometry={new OctahedronGeometry()}></DiceView>
 		{/if}
-		{#if diceState.data[10].target}
-			<DiceView dieState={diceState.data[10]} geometry={createD10Geometry()}></DiceView>
+		{#if d10Data.target}
+			<DiceView dieState={d10Data} geometry={createD10Geometry()}></DiceView>
 		{/if}
-		{#if diceState.data[12].target}
-			<DiceView dieState={diceState.data[12]} geometry={new DodecahedronGeometry()}></DiceView>
+		{#if d12Data.target}
+			<DiceView dieState={d12Data} geometry={new DodecahedronGeometry()}></DiceView>
 		{/if}
 	</Canvas>
 </div>

@@ -1,4 +1,4 @@
-import type { DieData } from '$lib/models/DieData';
+import { DiceType, type DieData } from '$lib/models/DieData';
 
 const createDefaultDie = (overrides: Partial<DieData> = {}): DieData => ({
 	target: undefined,
@@ -11,32 +11,26 @@ const createDefaultDie = (overrides: Partial<DieData> = {}): DieData => ({
 });
 
 class DiceState {
-	data = $state<Record<number, DieData>>({
-		4: createDefaultDie(),
-		6: createDefaultDie(),
-		8: createDefaultDie(),
-		10: createDefaultDie(),
-		12: createDefaultDie(),
-		20: createDefaultDie()
+	data = $state<Record<DiceType, DieData>>({
+		[DiceType.D4]: createDefaultDie(),
+		[DiceType.D6]: createDefaultDie(),
+		[DiceType.D8]: createDefaultDie(),
+		[DiceType.D10]: createDefaultDie(),
+		[DiceType.D12]: createDefaultDie(),
+		[DiceType.D20]: createDefaultDie()
 	});
 
-	updateDie(id: number, updatedState: Partial<DieData>) {
+	updateDie(id: DiceType, updatedState: Partial<DieData>) {
 		if (this.data[id]) {
 			Object.assign(this.data[id], updatedState);
 		}
 	}
 
-	resetDie(id: number) {
+	resetDie(id: DiceType) {
 		this.data[id] = createDefaultDie();
 	}
 
-	resetAll() {
-		Object.keys(this.data).forEach((id) => {
-			this.data[Number(id)] = createDefaultDie();
-		});
-	}
-
-	setRollingStatus(id: number, isRolling: boolean) {
+	setRollingStatus(id: DiceType, isRolling: boolean) {
 		this.data[id].isRolling = isRolling;
 	}
 }

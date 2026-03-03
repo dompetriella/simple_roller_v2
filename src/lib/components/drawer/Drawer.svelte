@@ -1,5 +1,7 @@
 <script>
+	import { DiceType } from '$lib/models/DieData';
 	import { drawerState, DrawerTab } from '$lib/state/DrawerState.svelte';
+	import DiceIcon from '../dice/dom/components/DiceIcon.svelte';
 	import DrawerTabButton from './components/DrawerTabButton.svelte';
 	import History from './components/history/History.svelte';
 	import Settings from './components/settings/Settings.svelte';

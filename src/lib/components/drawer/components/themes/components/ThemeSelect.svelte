@@ -39,7 +39,7 @@
 	button {
 		height: 4em;
 		width: 100%;
-		border-radius: 10px;
+		border-radius: 1em;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -52,7 +52,7 @@
 		width: 33%;
 		height: 100%;
 		display: flex;
-		border-radius: 10px;
+		border-radius: 1em;
 		border: 1px solid var(--onSurface);
 		overflow: hidden;
 	}

@@ -1,4 +1,5 @@
 <script>
+	import { DiceType } from '$lib/models/DieData';
 	import { diceState } from '$lib/state/DiceState.svelte';
 	import DicePanel from './components/DicePanel.svelte';
 </script>
@@ -6,16 +7,16 @@
 <div class="dice-container">
 	<div>
 		<div class="row">
-			<DicePanel dieValue={20} dieState={diceState.data[20]} />
-			<DicePanel dieValue={6} dieState={diceState.data[6]} />
+			<DicePanel diceType={DiceType.D20} />
+			<DicePanel diceType={DiceType.D6} />
 		</div>
 		<div class="row">
-			<DicePanel dieValue={4} dieState={diceState.data[4]} />
-			<DicePanel dieValue={8} dieState={diceState.data[8]} />
+			<DicePanel diceType={DiceType.D4} />
+			<DicePanel diceType={DiceType.D8} />
 		</div>
 		<div class="row">
-			<DicePanel dieValue={10} dieState={diceState.data[10]} />
-			<DicePanel dieValue={12} dieState={diceState.data[12]} />
+			<DicePanel diceType={DiceType.D10} />
+			<DicePanel diceType={DiceType.D12} />
 		</div>
 	</div>
 </div>

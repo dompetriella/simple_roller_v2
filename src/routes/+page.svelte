@@ -10,9 +10,8 @@
 <main>
 	<Backdrop />
 	<Drawer />
-
-	<DiceContainer />
 	<Navbar />
+	<DiceContainer />
 </main>
 
 <DiceCanvas />

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { DieData } from '$lib/models/DieData';
+	import type { DiceType, DieData } from '$lib/models/DieData';
 	import { SettingsKeys } from '$lib/models/Settings';
 	import { diceState } from '$lib/state/DiceState.svelte';
 	import { settingsState } from '$lib/state/SettingsState.svelte';
@@ -7,12 +7,12 @@
 	import { clampValue, generateRandomInt } from '$lib/utility/Numbers';
 
 	let {
-		dieValue,
-		dieState
+		diceType
 	}: {
-		dieValue: number;
-		dieState: DieData;
+		diceType: DiceType;
 	} = $props();
+
+	let dieState = $derived(diceState.data[diceType]);
 
 	// Value logic
 	let shouldAllowMultiplier = $derived(settingsState.data[SettingsKeys.AllowMultipleDice]);
@@ -22,25 +22,25 @@
 
 	const decrementMultiplier = (e: PointerEvent) => {
 		e.stopPropagation();
-		diceState.updateDie(dieValue, { multiplier: clampValue(dieState.multiplier - 1, 1, 100) });
+		diceState.updateDie(diceType, { multiplier: clampValue(dieState.multiplier - 1, 1, 100) });
 	};
 
 	const incrementMultiplier = (e: PointerEvent) => {
 		e.stopPropagation();
-		diceState.updateDie(dieValue, { multiplier: clampValue(dieState.multiplier + 1, 1, 100) });
+		diceState.updateDie(diceType, { multiplier: clampValue(dieState.multiplier + 1, 1, 100) });
 	};
 
 	const prepareDiceRoll = () => {
-		diceState.setRollingStatus(dieValue, true);
+		diceState.setRollingStatus(diceType, true);
 	};
 
 	const commitDiceRoll = () => {
-		diceState.updateDie(dieValue, {
-			rollList: Array.from({ length: dieState.multiplier }, () => generateRandomInt(1, dieValue))
+		diceState.updateDie(diceType, {
+			rollList: Array.from({ length: dieState.multiplier }, () => generateRandomInt(1, diceType))
 		});
 
 		setTimeout(() => {
-			diceState.setRollingStatus(dieValue, false);
+			diceState.setRollingStatus(diceType, false);
 		}, rollingAnimationDuration);
 	};
 
@@ -59,7 +59,7 @@
 	style:--flash-percent={backgroundFlashPercent}
 >
 	<div class="title-container">
-		<h1 class="dice-value-text">D{dieValue}</h1>
+		<h1 class="dice-value-text">D{diceType}</h1>
 		{#if dieState.multiplier > 1}
 			<sup class="multiplier-superscript">x{dieState.multiplier}</sup>
 		{/if}

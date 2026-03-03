@@ -4,7 +4,7 @@
 	import { generateRandomInt } from '$lib/utility/Numbers';
 	import { T, useTask } from '@threlte/core';
 	import { View } from '@threlte/extras';
-	import { BoxGeometry, Color, LineBasicMaterial, MeshBasicMaterial } from 'three';
+	import { Color, LineBasicMaterial, MeshBasicMaterial } from 'three';
 
 	let {
 		dieState,
