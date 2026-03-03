@@ -2,9 +2,19 @@
 	import DiceIcon from '$lib/components/dice/dom/components/DiceIcon.svelte';
 	import { DiceType } from '$lib/models/DieData';
 	import type { HistoryData } from '$lib/models/HistoryData';
+	import { SettingsKeys } from '$lib/models/Settings';
+	import { settingsState } from '$lib/state/SettingsState.svelte';
+	import { formatDateTime } from '$lib/utility/DateTime';
 	import { getArraySum } from '$lib/utility/Numbers';
 
 	let { historyData }: { historyData: HistoryData } = $props();
+
+	let diceValue = $derived(getArraySum(historyData.diceRolls));
+	let use24HourClock = $derived(settingsState.data[SettingsKeys.TwentyFourHourClock]);
+
+	function isCriticalRoll(roll: number): Boolean {
+		return historyData.diceType === DiceType.D20 && roll === 20;
+	}
 </script>
 
 <div class="entry-container">
@@ -14,17 +24,17 @@
 	</div>
 
 	<div class="data-container">
-		<p>{historyData.dateTime}</p>
+		<p>{formatDateTime(historyData.dateTime, use24HourClock)}</p>
 		{#if historyData.diceRolls.length > 1}
 			<div class="roll-container">
 				{#each historyData.diceRolls as rollData}
 					<div class="roll">
-						<h4>{rollData}</h4>
+						<h4 class:critical-roll={isCriticalRoll(rollData)}>{rollData}</h4>
 					</div>
 				{/each}
 			</div>
 		{/if}
-		<h3>{getArraySum(historyData.diceRolls)}</h3>
+		<h3 class:critical-roll={isCriticalRoll(diceValue)}>{diceValue}</h3>
 	</div>
 </div>
 
@@ -44,14 +54,15 @@
 
 	h3 {
 		margin: 0px;
+		margin-bottom: -4px;
 		padding: 0px;
 		color: var(--onSurface);
-		font-size: 2em;
+
+		font-size: 1.5em;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		width: 100%;
-		height: 100%;
 	}
 
 	h4 {
@@ -89,7 +100,7 @@
 		justify-content: start;
 		align-items: center;
 		flex-wrap: wrap;
-		padding: 0em 1em;
+		padding: 1em;
 		height: 100%;
 		gap: 0.5em;
 		min-width: 70%;
@@ -104,5 +115,9 @@
 		align-items: center;
 		border: 1px solid var(--onSurface);
 		border-radius: 0.25em;
+	}
+
+	.critical-roll {
+		color: var(--diceHighlightColor);
 	}
 </style>

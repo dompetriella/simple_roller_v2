@@ -2,6 +2,7 @@
 	import type { DiceType, DieData } from '$lib/models/DieData';
 	import { SettingsKeys } from '$lib/models/Settings';
 	import { diceState } from '$lib/state/DiceState.svelte';
+	import { historyState } from '$lib/state/HistoryState.svelte';
 	import { settingsState } from '$lib/state/SettingsState.svelte';
 	import { themeState } from '$lib/state/ThemeState.svelte';
 	import { clampValue, generateRandomInt } from '$lib/utility/Numbers';
@@ -35,9 +36,13 @@
 	};
 
 	const commitDiceRoll = () => {
+		let rolls = Array.from({ length: dieState.multiplier }, () => generateRandomInt(1, diceType));
+
 		diceState.updateDie(diceType, {
-			rollList: Array.from({ length: dieState.multiplier }, () => generateRandomInt(1, diceType))
+			rollList: rolls
 		});
+
+		historyState.addRollToHistory({ diceType: diceType, rollList: rolls });
 
 		setTimeout(() => {
 			diceState.setRollingStatus(diceType, false);

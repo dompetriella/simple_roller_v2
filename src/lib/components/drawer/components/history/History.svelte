@@ -1,13 +1,18 @@
 <script lang="ts">
 	import { historyState } from '$lib/state/HistoryState.svelte';
 	import HistoryEntry from './components/HistoryEntry.svelte';
+
+	let historyListData = $derived(historyState.data);
+	// Currently just reversed
+	// Would like to add other filter options
+	let visibleList = $derived([...historyListData].reverse());
 </script>
 
 <section>
 	<h1>History</h1>
 	<div class="history-entry-container">
-		{#if historyState.data.length > 0}
-			{#each historyState.data as entry}
+		{#if historyListData.length > 0}
+			{#each visibleList as entry}
 				<HistoryEntry historyData={entry} />
 			{/each}
 		{:else}
@@ -22,6 +27,7 @@
 		flex-direction: column;
 		align-items: center;
 		width: 100%;
+		overflow-y: scroll;
 	}
 
 	h1 {
