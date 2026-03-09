@@ -29,6 +29,7 @@
 		align-items: stretch;
 		height: 100%;
 		z-index: 1;
+		background: linear-gradient(var(--surface), var(--primary));
 	}
 
 	.row {

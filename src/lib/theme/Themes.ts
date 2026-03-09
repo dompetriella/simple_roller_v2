@@ -1,4 +1,4 @@
-import { type ThemeColors } from '../models/ThemeData';
+import { RollContainerType, type ThemeColors } from '../models/ThemeData';
 
 export enum ThemeName {
 	Midnight = 'Midnight',
@@ -76,7 +76,8 @@ export const THEMES: Record<ThemeName, ThemeColors> = {
 
 		diceColor: '#BDEEAC',
 		diceOutlineColor: '#3B8E39',
-		diceHighlightColor: '#50B5B5'
+		diceHighlightColor: '#50B5B5',
+		rollContainerType: RollContainerType.Orb
 	},
 	[ThemeName.Harvest]: {
 		surface: '#511C29',
@@ -107,7 +108,8 @@ export const THEMES: Record<ThemeName, ThemeColors> = {
 
 		diceColor: '#F56A05',
 		diceOutlineColor: '#FFFFFF',
-		diceHighlightColor: '#FFF268'
+		diceHighlightColor: '#FFF268',
+		rollContainerType: RollContainerType.Orb
 	},
 	[ThemeName.Brimstone]: {
 		surface: '#471113',
@@ -129,7 +131,8 @@ export const THEMES: Record<ThemeName, ThemeColors> = {
 
 		diceColor: '#2A4ABB',
 		diceOutlineColor: '#E3E3E3',
-		diceHighlightColor: '#8A9FFF'
+		diceHighlightColor: '#8A9FFF',
+		rollContainerType: RollContainerType.Orb
 	},
 	[ThemeName.Doldrums]: {
 		surface: '#888888',
@@ -139,6 +142,7 @@ export const THEMES: Record<ThemeName, ThemeColors> = {
 
 		diceColor: '#515151',
 		diceOutlineColor: '#28272F',
-		diceHighlightColor: '#D9D9D9'
+		diceHighlightColor: '#D9D9D9',
+		rollContainerType: RollContainerType.Solid
 	}
 };

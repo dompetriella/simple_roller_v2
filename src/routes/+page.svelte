@@ -17,7 +17,6 @@
 	main {
 		width: 100svw;
 		height: 100svh;
-		background: linear-gradient(var(--surface), var(--primary));
 
 		display: flex;
 		flex-direction: column;
