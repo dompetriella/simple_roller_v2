@@ -39,6 +39,7 @@
 		align-items: center;
 
 		width: 100%;
+		overflow-y: scroll;
 	}
 
 	.themes-list-container {
