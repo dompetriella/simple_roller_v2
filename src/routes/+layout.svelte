@@ -3,8 +3,11 @@
 	import type { Snippet } from 'svelte';
 	import '../app.css';
 	import { themeState } from '$lib/state/ThemeState.svelte';
+	import { LocalStorage } from '$lib/storage/LocalStorage.svelte';
 
 	let { children }: { children: Snippet } = $props();
+
+	LocalStorage.init();
 
 	let globalCssVars = $derived(
 		Object.entries(themeState.fullTheme)

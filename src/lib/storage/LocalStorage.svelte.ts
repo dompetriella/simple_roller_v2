@@ -1,23 +1,55 @@
-export class LocalStorage<T> {
-	private key: string;
-	private current: T = $state() as T;
+import { settingsState } from '$lib/state/SettingsState.svelte';
+import { defaultTheme, themeState } from '$lib/state/ThemeState.svelte';
+import type { ThemeName } from '$lib/theme/Themes';
+import { StorageKeys } from './StorageKeys.svelte';
 
-	constructor(key: string, initialValue: T) {
-		this.key = key;
+let initialized = $state(false);
 
-		let savedValue = initialValue;
-		// make sure we're in the browser
+export class LocalStorage {
+	static init() {
+		if (typeof window === 'undefined') return;
+
+		const themeFromStorage: ThemeName =
+			LocalStorage.retrieveData(StorageKeys.Theme) ?? defaultTheme;
+		if (themeFromStorage) {
+			themeState.setTheme(themeFromStorage as ThemeName);
+		}
+
+		const settingsFromStorage = LocalStorage.retrieveData<Record<string, any>>(
+			StorageKeys.Settings
+		);
+		if (settingsFromStorage) {
+			settingsState.overwriteSettings(settingsFromStorage);
+		}
+
+		initialized = true;
+	}
+
+	static get isLocalStorageInitialized() {
+		return initialized;
+	}
+
+	static retrieveData<T>(storageKey: string): T | null | undefined {
 		if (typeof window !== 'undefined') {
-			const item = localStorage.getItem(this.key);
+			const item = localStorage.getItem(storageKey);
 			if (item !== null) {
 				try {
-					savedValue = JSON.parse(item);
+					return JSON.parse(item) as T;
 				} catch (e) {
-					console.error('Failed to parse local storage, falling back to default');
+					console.error(`Failed to parse local storage for ${storageKey}, falling back to default`);
+					return null;
 				}
 			}
 		}
+	}
 
-		this.current = savedValue;
+	static saveData<T>(storageKey: string, data: T) {
+		if (typeof window !== 'undefined') {
+			try {
+				localStorage.setItem(storageKey, JSON.stringify(data));
+			} catch (e) {
+				console.error(`Couldn't save value ${data}, error: ${e}`);
+			}
+		}
 	}
 }

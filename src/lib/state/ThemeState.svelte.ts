@@ -1,7 +1,9 @@
+import { LocalStorage } from '$lib/storage/LocalStorage.svelte';
+import { StorageKeys } from '$lib/storage/StorageKeys.svelte';
 import { RollContainerType } from '../models/ThemeData';
 import { ThemeName, THEMES } from '../theme/Themes';
 
-const defaultTheme = ThemeName.Midnight;
+export const defaultTheme = ThemeName.Midnight;
 
 class ThemeState {
 	currentThemeName = $state<ThemeName>(defaultTheme);
@@ -28,6 +30,7 @@ class ThemeState {
 
 	setTheme(name: ThemeName) {
 		this.currentThemeName = name;
+		LocalStorage.saveData(StorageKeys.Theme, name);
 	}
 }
 
