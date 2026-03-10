@@ -1,5 +1,7 @@
 <script lang="ts">
 	import type { DieData } from '$lib/models/DieData';
+	import { SettingsKeys } from '$lib/models/Settings';
+	import { settingsState } from '$lib/state/SettingsState.svelte';
 	import { themeState } from '$lib/state/ThemeState.svelte';
 	import { generateRandomInt } from '$lib/utility/Numbers';
 	import { T, useTask } from '@threlte/core';
@@ -14,8 +16,10 @@
 		geometry: any;
 	} = $props();
 
+	let isIdleRotationEnabled = $derived(settingsState.data[SettingsKeys.IdleDiceRotation]);
+
 	// Initial Direction and Speed Values
-	const idleSpeed = 1;
+	let idleSpeed = $derived(isIdleRotationEnabled ? 1 : 0);
 	const rollSpeed = 25;
 	const interpolationFactor = 0.25;
 
