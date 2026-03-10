@@ -20,6 +20,7 @@
 		font-size: 2.5em;
 		color: var(--onSurface);
 		margin-bottom: 0px;
+		padding: 0px;
 	}
 
 	h2 {
@@ -39,7 +40,7 @@
 		align-items: center;
 
 		width: 100%;
-		overflow-y: scroll;
+		overflow-y: auto;
 	}
 
 	.themes-list-container {

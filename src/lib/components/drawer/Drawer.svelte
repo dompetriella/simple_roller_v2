@@ -1,6 +1,7 @@
 <script>
 	import { DiceType } from '$lib/models/DieData';
 	import { drawerState, DrawerTab } from '$lib/state/DrawerState.svelte';
+	import { LayerIndex } from '$lib/utility/LayerIndex';
 	import DiceIcon from '../dice/dom/components/DiceIcon.svelte';
 	import DrawerTabButton from './components/DrawerTabButton.svelte';
 	import History from './components/history/History.svelte';
@@ -19,9 +20,10 @@
 			}}
 			class="drawer-barrier"
 			aria-label="Close Drawer"
+			style:z-index={LayerIndex.drawerBarrier}
 		></button>
 	{/if}
-	<aside class="drawer" class:drawer-open={drawerState.isOpen}>
+	<aside class="drawer" class:drawer-open={drawerState.isOpen} style:z-index={LayerIndex.drawer}>
 		<div class="drawer-content">
 			<div class="tabs-container">
 				<DrawerTabButton tab={DrawerTab.Settings}>
@@ -56,7 +58,6 @@
 		height: 100%;
 		width: 100%;
 		background-color: color-mix(in srgb, var(--surface), transparent 60%);
-		z-index: 9;
 		border: none;
 	}
 
@@ -68,7 +69,6 @@
 		height: 100svh;
 		background-color: color-mix(in srgb, var(--surface), transparent 10%);
 		border-left: 1px solid var(--onSurface);
-		z-index: 10;
 		transform: translateX(100%);
 		transition:
 			transform 200ms ease-out,
@@ -94,5 +94,6 @@
 		height: 3em;
 		display: flex;
 		justify-content: stretch;
+		flex-shrink: 0;
 	}
 </style>

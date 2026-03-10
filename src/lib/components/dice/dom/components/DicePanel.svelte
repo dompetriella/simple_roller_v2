@@ -5,6 +5,7 @@
 	import { historyState } from '$lib/state/HistoryState.svelte';
 	import { settingsState } from '$lib/state/SettingsState.svelte';
 	import { themeState } from '$lib/state/ThemeState.svelte';
+	import { LayerIndex } from '$lib/utility/LayerIndex';
 	import { clampValue, generateRandomInt } from '$lib/utility/Numbers';
 
 	let {
@@ -62,6 +63,7 @@
 	class="roller-container"
 	class:active-roll={dieState.isRolling}
 	style:--flash-percent={backgroundFlashPercent}
+	style:z-index={LayerIndex.diceView}
 >
 	<div class="title-container">
 		<h1 class="dice-value-text">D{diceType}</h1>
@@ -168,7 +170,6 @@
 		justify-content: center;
 		align-items: center;
 		border-radius: 1em;
-		z-index: 1;
 		color: var(--onSecondarySurface);
 		background: radial-gradient(
 			circle,

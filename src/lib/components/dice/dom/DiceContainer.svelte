@@ -1,10 +1,11 @@
 <script>
 	import { DiceType } from '$lib/models/DieData';
 	import { diceState } from '$lib/state/DiceState.svelte';
+	import { LayerIndex } from '$lib/utility/LayerIndex';
 	import DicePanel from './components/DicePanel.svelte';
 </script>
 
-<div class="dice-container">
+<div class="dice-container" style:z-index={LayerIndex.diceContainerDOM}>
 	<div>
 		<div class="row">
 			<DicePanel diceType={DiceType.D20} />
@@ -28,8 +29,6 @@
 		justify-content: center;
 		align-items: stretch;
 		height: 100%;
-		z-index: 1;
-		background: linear-gradient(var(--surface), var(--primary));
 	}
 
 	.row {
