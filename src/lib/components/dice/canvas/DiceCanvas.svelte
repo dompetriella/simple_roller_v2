@@ -12,6 +12,7 @@
 	import { diceState } from '$lib/state/DiceState.svelte';
 	import { DiceType } from '$lib/models/DieData';
 	import { LayerIndex } from '$lib/utility/LayerIndex';
+
 	let d20Data = $derived(diceState.data[DiceType.D20]);
 	let d6Data = $derived(diceState.data[DiceType.D6]);
 	let d4Data = $derived(diceState.data[DiceType.D4]);

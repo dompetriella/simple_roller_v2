@@ -14,36 +14,32 @@
 
 <style>
 	h1 {
+		font-size: 1em;
 		padding: 0px;
 		margin: 0px;
 	}
 
 	nav {
-		border-bottom: 2px solid var(--onSurface);
-		height: 25svw;
-		padding: 0.5em;
+		position: absolute;
+		right: 0;
+		border: 2px solid var(--onSurface);
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		border-radius: 15px;
 		background-color: var(--surface);
-	}
-
-	.icon {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		height: 15svw;
-		width: 15svw;
-		font-size: 6svw;
+		margin: 1em;
+		overflow: hidden;
 	}
 
 	.settings-button {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		font-size: 1em;
+		gap: 0.5em;
 		background-color: var(--surface);
 		color: var(--onSurface);
+		padding: 1em;
 		border: none;
 	}
 </style>

@@ -163,8 +163,8 @@
 	}
 
 	.roller-container {
-		height: 38svw;
-		width: 38svw;
+		height: 40svw;
+		width: 40svw;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;

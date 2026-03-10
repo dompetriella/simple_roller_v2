@@ -3,14 +3,18 @@
 	import DiceContainer from '$lib/components/dice/dom/DiceContainer.svelte';
 	import Drawer from '$lib/components/drawer/Drawer.svelte';
 	import Navbar from '$lib/components/navbar/Navbar.svelte';
+	import BackgroundCanvas from '$lib/components/shaders/BackgroundCanvas.svelte';
+	import { SettingsKeys } from '$lib/models/Settings';
+	import { settingsState } from '$lib/state/SettingsState.svelte';
 	import { LocalStorage } from '$lib/storage/LocalStorage.svelte';
 	import { LayerIndex } from '$lib/utility/LayerIndex';
 
 	let appReady = $derived(LocalStorage.isLocalStorageInitialized);
+	// let showBackgroundShader = $derived(settingsState.data[SettingsKeys.ShowBackgroundShader]);
 </script>
 
-{#if !appReady}
-	<div class="loading-barrier" style:z-index={LayerIndex.loadingBarrier}></div>
+{#if false}
+	<BackgroundCanvas />
 {/if}
 
 <main class:initialized={appReady} style:z-index={LayerIndex.defaultBackground}>
@@ -20,6 +24,10 @@
 </main>
 
 <DiceCanvas />
+
+{#if !appReady}
+	<div class="loading-barrier" style:z-index={LayerIndex.loadingBarrier}></div>
+{/if}
 
 <style>
 	main {
