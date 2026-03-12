@@ -130,7 +130,7 @@
 
 	.switch-toggle-on {
 		transform: translateX(2em);
-		background-color: var(--diceHighlightColor);
+		background-color: var(--onPrimary);
 	}
 
 	.chevron-icon {
