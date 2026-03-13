@@ -58,8 +58,10 @@
 <div
 	onpointerdown={prepareDiceRoll}
 	onpointerup={commitDiceRoll}
+	onkeydown={(e) => (e.key === 'Enter' || e.key === ' ') && commitDiceRoll()}
 	role="button"
 	tabindex="0"
+	aria-label="Roll D{diceType}"
 	class="roller-container"
 	class:active-roll={dieState.isRolling}
 	style:--flash-percent={backgroundFlashPercent}
@@ -91,11 +93,21 @@
 			>
 		{/if}
 	</div>
-	<h1 class="dice-roll-text" class:rolling-text={dieState.isRolling}>
+	<h1
+		class="dice-roll-text no-user-select"
+		aria-live="polite"
+		aria-atomic="true"
+		class:rolling-text={dieState.isRolling}
+	>
 		{rollTotal == 0 ? '--' : rollTotal}
 	</h1>
 	{#if shouldAllowMultiplier}
-		<p class="dice-roll-list-text" class:rolling-text={dieState.isRolling}>
+		<p
+			class="dice-roll-list-text no-user-select"
+			aria-live="polite"
+			aria-atomic="true"
+			class:rolling-text={dieState.isRolling}
+		>
 			{#if dieState.rollList.length > 1}
 				[{dieState.rollList.join(' + ')}]
 			{:else}
@@ -193,5 +205,10 @@
 	.target {
 		width: 18svw;
 		height: 18svw;
+	}
+
+	.no-user-select {
+		user-select: none;
+		-webkit-user-select: none;
 	}
 </style>
