@@ -9,12 +9,19 @@
 
 	LocalStorage.init();
 
+	export const ssr = false;
+	export const prerender = true;
+
 	let globalCssVars = $derived(
 		Object.entries(themeState.fullTheme)
 			.map(([key, value]) => `--${key}: ${value};`)
 			.join(' ')
 	);
 </script>
+
+<svelte:head>
+	<title>Simple Roller V2</title>
+</svelte:head>
 
 <div style={globalCssVars}>
 	{@render children()}
