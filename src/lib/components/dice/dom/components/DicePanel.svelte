@@ -68,7 +68,7 @@
 	style:z-index={LayerIndex.diceView}
 >
 	<div class="title-container">
-		<h1 class="dice-value-text">D{diceType}</h1>
+		<h1 class="dice-value-text no-user-select">D{diceType}</h1>
 		{#if dieState.multiplier > 1}
 			<sup class="multiplier-superscript">x{dieState.multiplier}</sup>
 		{/if}
