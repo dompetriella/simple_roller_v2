@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { DiceType } from '$lib/models/DieData';
 	import { drawerState, DrawerTab } from '$lib/state/DrawerState.svelte';
 	import { LayerIndex } from '$lib/utility/LayerIndex';
@@ -8,6 +8,33 @@
 	import Settings from './components/settings/Settings.svelte';
 	import SettingsTab from './components/settings/Settings.svelte';
 	import Themes from './components/themes/Themes.svelte';
+
+	let startDrawerPullX = 0;
+
+	function handleDragStart(e: TouchEvent): void {
+		startDrawerPullX = e.touches[0].clientX;
+		drawerState.setIsDragging(true);
+		console.log('Drag start');
+	}
+
+	function handleDragMove(e: TouchEvent): void {
+		if (!drawerState.isDragging) return;
+
+		const currentX = e.touches[0].clientX;
+		const deltaX = currentX - startDrawerPullX;
+		drawerState.setDragOffset(deltaX);
+		console.log('dragging');
+	}
+
+	function handleDragEnd(): void {
+		console.log(`${drawerState.dragOffset} > ${drawerState.closeThreshold}`);
+		if (drawerState.dragOffset > drawerState.closeThreshold) {
+			drawerState.close();
+		} else {
+			drawerState.resetDrag();
+		}
+		console.log('drag end');
+	}
 </script>
 
 <div class="container">
@@ -23,7 +50,18 @@
 			style:z-index={LayerIndex.drawerBarrier}
 		></button>
 	{/if}
-	<aside class="drawer" class:drawer-open={drawerState.isOpen} style:z-index={LayerIndex.drawer}>
+	<aside
+		class="drawer"
+		class:drawer-open={drawerState.isOpen}
+		class:dragging={drawerState.isDragging}
+		ontouchstart={handleDragStart}
+		ontouchmove={handleDragMove}
+		ontouchend={handleDragEnd}
+		style:z-index={LayerIndex.drawer}
+		style:transform={drawerState.isOpen
+			? `translateX(${drawerState.dragOffset}px)`
+			: 'translateX(100%)'}
+	>
 		<div class="drawer-content">
 			<div class="tabs-container">
 				<DrawerTabButton tab={DrawerTab.Settings}>
@@ -71,8 +109,13 @@
 		border-left: 1px solid var(--onSurface);
 		transform: translateX(100%);
 		transition:
-			transform 200ms ease-out,
+			transform 250ms ease-out,
 			background-color 400ms ease-in-out;
+		touch-action: pan-y;
+	}
+
+	.dragging {
+		transition: none !important;
 	}
 
 	.drawer-open {
