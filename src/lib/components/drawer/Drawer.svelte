@@ -82,7 +82,9 @@
 	.drawer-content {
 		width: 100%;
 		height: 100%;
-		padding: 1em;
+		padding-top: 1em;
+		padding-left: 1em;
+		padding-right: 1em;
 
 		display: flex;
 		flex-direction: column;
