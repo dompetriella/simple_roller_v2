@@ -143,6 +143,6 @@ export const THEMES: Record<ThemeName, ThemeColors> = {
 		diceColor: '#515151',
 		diceOutlineColor: '#28272F',
 		diceHighlightColor: '#D9D9D9',
-		rollContainerType: RollContainerType.Solid
+		rollContainerType: RollContainerType.Orb
 	}
 };

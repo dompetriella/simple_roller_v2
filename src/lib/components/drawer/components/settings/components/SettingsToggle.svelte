@@ -19,7 +19,9 @@
 			<h3>{configuration.title}</h3>
 		</div>
 		{#if isExpanded}
-			<div class="expanded-info-container">{configuration.description}</div>
+			<p class="expanded-info-container">
+				{configuration.description}
+			</p>
 		{/if}
 	</button>
 
@@ -53,8 +55,16 @@
 
 	h3 {
 		text-align: start;
-		font-size: 0.75em;
+		margin: 0px;
+		padding: 0px;
+		font-size: 1em;
 		font-weight: 200;
+	}
+
+	p {
+		text-align: start;
+		font-size: 1em;
+		font-weight: 100;
 	}
 
 	.info-button {
@@ -77,18 +87,6 @@
 		display: flex;
 		justify-content: start;
 		gap: 0.5em;
-	}
-
-	.expanded-info-container {
-		text-align: start;
-		font-size: 0.75em;
-		font-weight: 100;
-	}
-
-	h3 {
-		margin: 0px;
-		padding: 0px;
-		font-size: 1em;
 	}
 
 	.switch-container {
